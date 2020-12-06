@@ -14,18 +14,7 @@ _get_latest_version() {
 }
 
 _download_v2ray_file() {
-	_get_latest_version
-	[[ -d /tmp/v2ray ]] && rm -rf /tmp/v2ray
-	mkdir -p /tmp/v2ray
 	v2ray_tmp_file="/tmp/v2ray/v2ray.zip"
-	v2ray_download_link="https://github.com/v2ray/v2ray-core/releases/tag/v4.31.0/v2ray-linux-${v2ray_bit}.zip"
-
-	if ! wget --no-check-certificate -O "$v2ray_tmp_file" $v2ray_download_link; then
-		echo -e "
-        $red 下载 V2Ray 失败啦..可能是你的 VPS 网络太辣鸡了...请重试...$none
-        " && exit 1
-	fi
-
 	unzip $v2ray_tmp_file -d "/tmp/v2ray/"
 	mkdir -p /usr/bin/v2ray
 	cp -f "/tmp/v2ray/v2ray" "/usr/bin/v2ray/v2ray"
